@@ -5,7 +5,8 @@ contract credentialRegistry {
     struct Credential
     {
         string id;
-        address officialIssuer;
+        string issuer;
+        string holder;
         string credentialHash;
         string r;
         string e;
@@ -16,14 +17,16 @@ contract credentialRegistry {
 
     function issueCredential(
         string _id,
-        address _officialIssuer,
+        string _issuer,
+        string _holder,
         string _credentialHash,
         string _r,
         string _e,
         string _N1
     ) public {
         credential[_id].id = _id;
-        credential[_id].officialIssuer = _officialIssuer;
+        credential[_id].issuer = _issuer;
+        credential[_id].holder = _holder;
         credential[_id].credentialHash = _credentialHash;
         credential[_id].r = _r;
         credential[_id].e = _e;
@@ -36,7 +39,8 @@ contract credentialRegistry {
         view
         returns (
             string __id,
-            address __officialIssuer,
+            string __issuer,
+            string __holder,
             string __credentialHash,
             string __r,
             string __e,
@@ -45,7 +49,8 @@ contract credentialRegistry {
     {
         return (
             credential[_id].id,
-            credential[_id].officialIssuer,
+            credential[_id].issuer,
+            credential[_id].holder,
             credential[_id].credentialHash,
             credential[_id].r,
             credential[_id].e,
